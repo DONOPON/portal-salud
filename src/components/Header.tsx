@@ -1,12 +1,14 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { LogOut, Heart, User, Stethoscope } from "lucide-react";
 import { getSesion, logout } from "@/lib/data";
 import { useState, useEffect } from "react";
 
 export function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const sesion = getSesion();
   const [scrolled, setScrolled] = useState(false);
+  const isLanding = location.pathname === "/";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -21,8 +23,8 @@ export function Header() {
     navigate({ to: "/" });
   };
 
-  // When logged in, always show solid bg. When on landing (no session), dynamic.
-  const isTransparent = !sesion && !scrolled;
+  // Only transparent on landing page when not scrolled and not logged in
+  const isTransparent = isLanding && !sesion && !scrolled;
 
   return (
     <header
