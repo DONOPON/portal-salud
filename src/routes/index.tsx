@@ -18,8 +18,8 @@ export const Route = createFileRoute("/")({
 const sliderImages = [
   "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=1920&q=80",
   "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80",
-  "https://images.unsplash.com/photo-1666214280577-5765a8a4ae26?auto=format&fit=crop&w=1920&q=80",
-  "https://images.unsplash.com/photo-1551190822-a9ce113ac100?auto=format&fit=crop&w=1920&q=80",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80",
+  "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1920&q=80",
 ];
 
 function Index() {
