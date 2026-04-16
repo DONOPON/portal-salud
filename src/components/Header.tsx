@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { LogOut, Heart, User, Stethoscope } from "lucide-react";
 import { getSesion, logout } from "@/lib/data";
 import { useState, useEffect } from "react";
