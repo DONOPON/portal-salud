@@ -26,10 +26,10 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isTransparent
           ? "bg-transparent"
-          : "border-b border-border bg-primary shadow-md"
+          : "bg-primary shadow-md"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
