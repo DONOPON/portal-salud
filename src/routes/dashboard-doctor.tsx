@@ -53,7 +53,6 @@ function DashboardDoctor() {
 
   return (
     <div className="min-h-screen" key={refresh}>
-      <Header />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Dashboard Médico</h1>

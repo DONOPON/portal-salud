@@ -48,7 +48,6 @@ function DashboardPaciente() {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
