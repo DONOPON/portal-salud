@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { getSesion, getCitas, guardarDiagnostico, getUsuarios, type Cita } from "@/lib/data";
-import { Header } from "@/components/Header";
+
 import { CitaCard } from "@/components/CitaCard";
 import { Stethoscope, X, Save } from "lucide-react";
 

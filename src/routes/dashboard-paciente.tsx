@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { getSesion, getCitas, setFavorito, getDoctores, type Cita } from "@/lib/data";
 import { generarPDFDiagnostico } from "@/lib/pdf";
-import { Header } from "@/components/Header";
+
 import { FavoriteDoctorCard } from "@/components/FavoriteDoctorCard";
 import { CitaCard } from "@/components/CitaCard";
 import { Calendar, ClipboardList, Star, Plus } from "lucide-react";
