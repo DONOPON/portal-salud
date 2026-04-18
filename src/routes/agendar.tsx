@@ -58,6 +58,36 @@ function AgendarPage() {
     setTimeout(() => navigate({ to: "/dashboard-paciente" }), 2000);
   };
 
+  // Calcula horarios ocupados del médico en la fecha seleccionada
+  const horariosOcupados = useMemo(() => {
+    if (!doctorId || !fecha) return new Set<string>();
+    const citas = getCitas();
+    return new Set(
+      citas
+        .filter(
+          (c) =>
+            c.doctorId === Number(doctorId) &&
+            c.fecha === fecha &&
+            c.estado !== "Cancelada",
+        )
+        .map((c) => c.hora),
+    );
+  }, [doctorId, fecha]);
+
+  // Resetea hora si la fecha o el doctor cambian
+  useEffect(() => {
+    setHora("");
+  }, [doctorId, fecha]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!doctorId || !fecha || !hora || !motivo) return;
+    if (horariosOcupados.has(hora)) return;
+    agendarCita(sesion.id, Number(doctorId), fecha, hora, motivo);
+    setExito(true);
+    setTimeout(() => navigate({ to: "/dashboard-paciente" }), 2000);
+  };
+
   if (exito) {
     return (
       <div className="min-h-screen">
