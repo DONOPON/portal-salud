@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { getSesion, getCitas, guardarDiagnostico, getUsuarios, type Cita } from "@/lib/data";
-import { Header } from "@/components/Header";
+
 import { CitaCard } from "@/components/CitaCard";
 import { Stethoscope, X, Save } from "lucide-react";
 
@@ -53,7 +53,6 @@ function DashboardDoctor() {
 
   return (
     <div className="min-h-screen" key={refresh}>
-      <Header />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground">Dashboard Médico</h1>

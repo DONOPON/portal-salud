@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { getSesion, getCitas, setFavorito, getDoctores, type Cita } from "@/lib/data";
 import { generarPDFDiagnostico } from "@/lib/pdf";
-import { Header } from "@/components/Header";
+
 import { FavoriteDoctorCard } from "@/components/FavoriteDoctorCard";
 import { CitaCard } from "@/components/CitaCard";
 import { Calendar, ClipboardList, Star, Plus } from "lucide-react";
@@ -48,7 +48,6 @@ function DashboardPaciente() {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8 flex items-center justify-between">
           <div>

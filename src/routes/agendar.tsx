@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { getSesion, getDoctores, ESPECIALIDADES, agendarCita } from "@/lib/data";
-import { Header } from "@/components/Header";
+
 import { Calendar, Search, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/agendar")({
@@ -51,7 +51,6 @@ function AgendarPage() {
   if (exito) {
     return (
       <div className="min-h-screen">
-        <Header />
         <div className="flex flex-col items-center justify-center px-4 py-20 text-center">
           <CheckCircle2 className="mb-4 h-16 w-16 text-success" />
           <h2 className="text-2xl font-bold text-foreground">¡Cita agendada!</h2>
@@ -63,7 +62,6 @@ function AgendarPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <div className="mx-auto max-w-lg px-4 py-8">
         <h1 className="mb-2 text-2xl font-bold text-foreground">Agendar Cita</h1>
         <p className="mb-8 text-sm text-muted-foreground">Selecciona especialidad, médico, fecha y hora</p>
