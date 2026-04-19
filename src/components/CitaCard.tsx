@@ -22,7 +22,7 @@ export function CitaCard({ cita, viewAs, onDiagnosticar, onDescargarReceta, onDe
 
   const EstadoIcon = cita.estado === "Finalizada" ? CheckCircle2 : AlertCircle;
 
-  // El paciente NO debe ver diagnóstico, observaciones ni imágenes clínicas.
+  // El paciente NO debe ver diagnóstico, observaciones ni imágenes clínicas: solo la receta.
   const mostrarHistorialClinico = viewAs === "doctor";
   const mostrarReceta = viewAs === "paciente" && cita.receta;
 
@@ -59,15 +59,17 @@ export function CitaCard({ cita, viewAs, onDiagnosticar, onDescargarReceta, onDe
               {cita.hora}
             </span>
           </div>
+
           {mostrarHistorialClinico && cita.diagnostico && (
             <div className="mt-3 rounded-md bg-muted p-3">
               <p className="text-sm font-medium text-foreground">Diagnóstico:</p>
               <p className="mt-1 text-sm text-muted-foreground">{cita.diagnostico}</p>
               {cita.observaciones && (
-                <p className="mt-1 text-xs text-muted-foreground italic">{cita.observaciones}</p>
+                <p className="mt-1 text-xs italic text-muted-foreground">{cita.observaciones}</p>
               )}
             </div>
           )}
+
           {mostrarHistorialClinico && cita.receta && (
             <div className="mt-3 rounded-md border border-accent/30 bg-accent/5 p-3">
               <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
@@ -77,6 +79,7 @@ export function CitaCard({ cita, viewAs, onDiagnosticar, onDescargarReceta, onDe
               <p className="mt-1 whitespace-pre-line text-sm text-muted-foreground">{cita.receta}</p>
             </div>
           )}
+
           {mostrarReceta && (
             <div className="mt-3 rounded-md border border-accent/30 bg-accent/5 p-3">
               <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
@@ -86,6 +89,7 @@ export function CitaCard({ cita, viewAs, onDiagnosticar, onDescargarReceta, onDe
               <p className="mt-1 whitespace-pre-line text-sm text-muted-foreground">{cita.receta}</p>
             </div>
           )}
+
           {viewAs === "paciente" && cita.estado === "Finalizada" && !cita.receta && (
             <p className="mt-3 text-xs italic text-muted-foreground">El médico no emitió receta para esta consulta.</p>
           )}
