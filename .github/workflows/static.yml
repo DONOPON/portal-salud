@@ -28,6 +28,21 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: List build output
+        run: |
+          echo "---- root ----"
+          ls -la
+          echo "---- dist ----"
+          ls -la dist || true
+          echo "---- dist/assets ----"
+          ls -la dist/assets || true
+          echo "---- .output ----"
+          ls -la .output || true
+          echo "---- .output/public ----"
+          ls -la .output/public || true
+          echo "---- build ----"
+          ls -la build || true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
