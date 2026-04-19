@@ -28,21 +28,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: List build output
-        run: |
-          echo "---- root ----"
-          ls -la
-          echo "---- dist ----"
-          ls -la dist || true
-          echo "---- dist/client ----"
-          ls -la dist/client || true
-          echo "---- dist/server ----"
-          ls -la dist/server || true
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/client
+          path: ./dist
 
   deploy:
     environment:
