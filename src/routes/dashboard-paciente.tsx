@@ -57,6 +57,7 @@ function DashboardPaciente() {
           </div>
           <Link
             to="/agendar"
+            search={{ doctorId: undefined }}
             className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             <Plus className="h-4 w-4" />
@@ -107,7 +108,7 @@ function DashboardPaciente() {
                 <div className="py-12 text-center text-muted-foreground">
                   <Calendar className="mx-auto mb-3 h-10 w-10" />
                   <p>No tienes citas pendientes</p>
-                  <Link to="/agendar" className="mt-2 inline-block text-sm font-medium text-primary hover:underline">
+                  <Link to="/agendar" search={{ doctorId: undefined }} className="mt-2 inline-block text-sm font-medium text-primary hover:underline">
                     Agendar una cita
                   </Link>
                 </div>
