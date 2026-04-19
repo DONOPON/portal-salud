@@ -1,7 +1,24 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  vite: {
-    base: "/health-flow-sim/",
+  base: "/health-flow-sim/",
+  plugins: [
+    tsconfigPaths(),
+    TanStackRouterVite({
+      target: "react",
+      autoCodeSplitting: true,
+      routesDirectory: "./src/routes",
+      generatedRouteTree: "./src/routeTree.gen.ts",
+    }),
+    react(),
+    tailwindcss(),
+  ],
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
   },
 });
