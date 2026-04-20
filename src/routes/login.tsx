@@ -14,6 +14,7 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,8 +31,7 @@ function LoginPage() {
         return;
       }
 
-      const destino = u.rol === "paciente" ? "/dashboard-paciente" : "/dashboard-doctor";
-      window.location.hash = destino;
+      navigate({ to: u.rol === "paciente" ? "/dashboard-paciente" : "/dashboard-doctor" });
     } catch (err) {
       console.error(err);
       setError("Ocurrió un error al iniciar sesión");
