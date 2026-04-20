@@ -1,8 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { getSesion, getCitas, setFavorito, getDoctores, type Cita } from "@/lib/data";
+import { getSesion, getCitas, setFavorito, getDoctores, type Cita, type Usuario } from "@/lib/data";
 import { generarPDFReceta } from "@/lib/pdf";
-
 import { FavoriteDoctorCard } from "@/components/FavoriteDoctorCard";
 import { CitaCard } from "@/components/CitaCard";
 import { Calendar, Pill, Star, Plus } from "lucide-react";
@@ -19,13 +18,15 @@ export const Route = createFileRoute("/dashboard-paciente")({
 
 function DashboardPaciente() {
   const navigate = useNavigate();
-  const [sesion, setSesionState] = useState(getSesion());
+  // ✅ FIX: null inicial, se carga en useEffect
+  const [sesion, setSesionState] = useState<Usuario | null>(null);
   const [tab, setTab] = useState<"proximas" | "recetas">("proximas");
 
   useEffect(() => {
     const s = getSesion();
     if (!s || s.rol !== "paciente") {
       navigate({ to: "/login" });
+      return;
     }
     setSesionState(s);
   }, [navigate]);
@@ -65,7 +66,6 @@ function DashboardPaciente() {
           </Link>
         </div>
 
-        {/* Stats */}
         <div className="mb-8 grid grid-cols-3 gap-4">
           {[
             { icon: Calendar, label: "Citas pendientes", value: citasProximas.length, color: "text-primary" },
@@ -80,12 +80,10 @@ function DashboardPaciente() {
           ))}
         </div>
 
-        {/* Favorite doctor */}
         <div className="mb-8">
           <FavoriteDoctorCard paciente={sesion} />
         </div>
 
-        {/* Tabs */}
         <div className="mb-6 flex gap-1 rounded-lg bg-muted p-1">
           {([["proximas", "Próximas citas"], ["recetas", "Mis recetas"]] as const).map(([key, label]) => (
             <button
@@ -100,7 +98,6 @@ function DashboardPaciente() {
           ))}
         </div>
 
-        {/* Content */}
         <div className="space-y-4">
           {tab === "proximas" && (
             <>
@@ -121,7 +118,7 @@ function DashboardPaciente() {
           {tab === "recetas" && (
             <>
               <p className="mb-2 text-xs text-muted-foreground">
-                Por privacidad, solo se muestran las recetas e indicaciones que tu médico te entregó. El historial clínico completo solo es accesible por el doctor.
+                Por privacidad, solo se muestran las recetas e indicaciones que tu médico te entregó.
               </p>
               {recetas.length === 0 && (
                 <div className="py-12 text-center text-muted-foreground">
@@ -136,7 +133,6 @@ function DashboardPaciente() {
           )}
         </div>
 
-        {/* Doctor list for favorites */}
         <div className="mt-12">
           <h2 className="mb-4 text-lg font-bold text-foreground">Médicos disponibles</h2>
           <div className="grid gap-3 sm:grid-cols-2">
