@@ -1,15 +1,13 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { Heart, Stethoscope, UserCheck, Shield, ArrowRight, Users, UserPlus, Wifi } from "lucide-react";
 import { getSesion } from "@/lib/data";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";  // ← quita useCallback
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "SaludDigital - Portal de Salud Digital" },
-      { name: "description", content: "Tu portal de salud digital. Agenda citas, consulta tu historial clínico y descarga tus diagnósticos." },
-      { property: "og:title", content: "SaludDigital - Portal de Salud Digital" },
-      { property: "og:description", content: "Tu portal de salud digital. Agenda citas, consulta tu historial clínico y descarga tus diagnósticos." },
+      { name: "description", content: "Tu portal de salud digital." },
     ],
   }),
   component: Index,
@@ -26,26 +24,23 @@ function Index() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // ✅ FIX: getSesion() solo en useEffect, nunca en el render directo
   useEffect(() => {
-    const sesion = getSesion();
-    if (sesion) {
-      navigate({ to: sesion.rol === "paciente" ? "/dashboard-paciente" : "/dashboard-doctor" });
+    const s = getSesion();
+    if (s) {
+      navigate({ to: s.rol === "paciente" ? "/dashboard-paciente" : "/dashboard-doctor" });
     }
   }, [navigate]);
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
-  }, []);
-
+  // ✅ sin useCallback, lógica inline en el useEffect
   useEffect(() => {
-    const timer = setInterval(nextSlide, 7000);
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+    }, 7000);
     return () => clearInterval(timer);
-  }, [nextSlide]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero with Image Slider */}
       <div className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
         {sliderImages.map((src, i) => (
           <div
@@ -108,7 +103,6 @@ function Index() {
         </div>
       </div>
 
-      {/* Stats */}
       <div className="bg-primary px-4 py-10">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-8 sm:gap-16">
           {[
@@ -129,7 +123,6 @@ function Index() {
         </div>
       </div>
 
-      {/* Features */}
       <div className="mx-auto max-w-5xl px-4 py-16">
         <h2 className="mb-10 text-center text-2xl font-bold text-foreground">
           ¿Qué puedes hacer?
@@ -151,7 +144,6 @@ function Index() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="border-t border-border bg-card px-4 py-8 text-center text-sm text-muted-foreground">
         <p>SaludDigital — Prototipo funcional de Portal de Salud Digital</p>
       </footer>
