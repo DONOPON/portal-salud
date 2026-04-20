@@ -2,35 +2,8 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { Header } from "@/components/Header";
 import appCss from "../styles.css?url";
 
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <Header />
-      <div className="pt-16">
-        <Outlet />
-      </div>
-    </>
-  ),
-  shellComponent: ({ children }: { children: React.ReactNode }) => (
-    <html lang="es">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SaludDigital - Portal de Salud Digital</title>
-        <meta
-          name="description"
-          content="Tu portal de salud digital. Agenda citas, consulta tu historial clínico y descarga tus diagnósticos."
-        />
-        <link rel="stylesheet" href={appCss} />
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-  notFoundComponent: () => (
+function NotFoundComponent() {
+  return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
@@ -48,5 +21,44 @@ export const Route = createRootRoute({
         </div>
       </div>
     </div>
-  ),
+  );
+}
+
+function RootShell({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="es">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SaludDigital - Portal de Salud Digital</title>
+        <meta
+          name="description"
+          content="Tu portal de salud digital. Agenda citas, consulta tu historial clínico y descarga tus diagnósticos."
+        />
+        <link rel="stylesheet" href={appCss} />
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export const Route = createRootRoute({
+  component: RootComponent,
+  shellComponent: RootShell,
+  notFoundComponent: NotFoundComponent,
 });
+
+function RootComponent() {
+  return (
+    <>
+      <Header />
+      <div className="pt-16">
+        <Outlet />
+      </div>
+    </>
+  );
+}
