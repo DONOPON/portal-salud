@@ -5,12 +5,11 @@ import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig as lovableDefineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// En Lovable sandbox corre como app SSR con TanStack Start en Cloudflare Workers.
-// En build local para GitHub Pages, genera una SPA estática en /dist
-// usando la base "/health-flow-sim/".
+// In the Lovable sandbox we run as a TanStack Start SSR app on Cloudflare Workers
+// (the sandbox proxy expects this). For local builds (GitHub Pages) we emit a
+// pure static SPA into dist/ under base "/health-flow-sim/".
 const isSandbox =
-  process.env.LOVABLE_SANDBOX === "1" ||
-  !!process.env.DEV_SERVER__PROJECT_PATH;
+  process.env.LOVABLE_SANDBOX === "1" || !!process.env.DEV_SERVER__PROJECT_PATH;
 
 const sharedPlugins = [
   tsconfigPaths(),
