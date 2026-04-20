@@ -15,7 +15,7 @@ const sharedPlugins = [
   tsconfigPaths(),
   TanStackRouterVite({
     target: "react",
-    autoCodeSplitting: true,
+    autoCodeSplitting: false,
     routesDirectory: "./src/routes",
     generatedRouteTree: "./src/routeTree.gen.ts",
   }),
