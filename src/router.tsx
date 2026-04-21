@@ -1,4 +1,4 @@
-import { createRouter, useRouter, createHashHistory, createMemoryHistory, Link } from "@tanstack/react-router";
+import { createRouter, useRouter, createBrowserHistory, createMemoryHistory, Link } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
