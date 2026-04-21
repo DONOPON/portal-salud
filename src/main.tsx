@@ -2,7 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "@tanstack/react-router";
 import { getRouter } from "./router";
+import { installChunkRecovery, clearReloadAttempt } from "./lib/chunkRecovery";
 import "./styles.css";
+
+installChunkRecovery();
 
 const router = getRouter();
 
@@ -18,3 +21,7 @@ createRoot(rootEl).render(
     <RouterProvider router={router} />
   </StrictMode>
 );
+
+// If the app mounted successfully, the previous reload attempt clearly worked.
+clearReloadAttempt();
+
